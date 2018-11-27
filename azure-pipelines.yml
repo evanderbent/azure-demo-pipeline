@@ -10,11 +10,13 @@ steps:
   
 - task: Npm@1
   displayName: 'npm install'
+  workingDirectory: apps
   inputs:
     command: install
 
 - task: Npm@1
   displayName: 'npm test'
+  workingDirectory: apps
   inputs:
     command: custom
     customCommand: 'test'
