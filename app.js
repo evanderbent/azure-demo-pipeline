@@ -1,4 +1,4 @@
-var port = process.env.PORT || 8080,
+var port = process.env.PORT || 80,
     http = require('http'),
     fs = require('fs'),
 	os = require('os'),
