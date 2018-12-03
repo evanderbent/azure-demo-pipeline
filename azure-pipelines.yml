@@ -29,11 +29,9 @@ steps:
   inputs:
   - script: docker build -t $(dockerId)/$(imageName) .
  
-- task: CmdLine@2
+- script: |
+    docker login -u $(dockerId) -p $(dockerPassword)
+    docker push $(dockerId)/$(imageName)
+    docker tag $(dockerId)/$(imageName) $(dockerId)/$(imageNameLatest)
+    docker push $(dockerId)/$(imageNameLatest)
   displayName: 'docker hub push'
-  inputs:
-  - script: |
-      docker login -u $(dockerId) -p $(dockerPassword)
-      docker push $(dockerId)/$(imageName)
-      docker tag $(dockerId)/$(imageName) $(dockerId)/$(imageNameLatest)
-      docker push $(dockerId)/$(imageNameLatest)
