@@ -31,6 +31,7 @@ steps:
  
 - task: CmdLine@2
   displayName: 'docker hub push'
+  inputs:
     - script: |
         docker login -u $(dockerId) -p $(dockerPassword)
         docker push $(dockerId)/$(imageName)
