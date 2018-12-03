@@ -24,10 +24,8 @@ steps:
 
 - task: PublishBuildArtifacts@1
 
-- task: CmdLine@2
+- script: docker build -t $(dockerId)/$(imageName) .
   displayName: 'docker build'
-  inputs:
-  - script: docker build -t $(dockerId)/$(imageName) .
  
 - script: |
     docker login -u $(dockerId) -p $(dockerPassword)
