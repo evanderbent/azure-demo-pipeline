@@ -33,7 +33,7 @@ steps:
   displayName: 'docker hub push'
   inputs:
   - script: |
-    docker login -u $(dockerId) -p $(dockerPassword)
-    docker push $(dockerId)/$(imageName)
-    docker tag $(dockerId)/$(imageName) $(dockerId)/$(imageNameLatest)
-    docker push $(dockerId)/$(imageNameLatest)
+      docker login -u $(dockerId) -p $(dockerPassword)
+      docker push $(dockerId)/$(imageName)
+      docker tag $(dockerId)/$(imageName) $(dockerId)/$(imageNameLatest)
+      docker push $(dockerId)/$(imageNameLatest)
