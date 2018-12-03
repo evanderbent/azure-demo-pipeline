@@ -2,6 +2,10 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript?view=vsts
 pool:
   vmImage: 'Ubuntu 16.04'
+
+variables:
+  imageName: 'demo-node-app:$(build.buildId)'
+  imageNameLatest: 'demo-node-app:latest'
   
 steps:
 - task: NodeTool@0
@@ -19,3 +23,16 @@ steps:
     includeRootFolder: false
 
 - task: PublishBuildArtifacts@1
+
+- task: CmdLine@2
+  displayName: 'docker build'
+  inputs:
+  - script: docker build -t $(dockerId)/$(imageName) .
+ 
+- task: CmdLine@2
+  displayName: 'docker hub push'
+    - script: |
+        docker login -u $(dockerId) -p $(dockerPassword)
+        docker push $(dockerId)/$(imageName)
+        docker tag $(dockerId)/$(imageName) $(dockerId)/$(imageNameLatest)
+        docker push $(dockerId)/$(imageNameLatest)
